@@ -1,0 +1,25 @@
+version: "3.2"
+
+services:
+  droopy:
+    container_name: droopy
+    networks:
+      - web
+    volumes:
+      - './uploads:/uploads'
+    build:
+      context: '.'
+      dockerfile: 'Dockerfile'
+    labels:
+      - 'traefik.docker.network=web'
+      - 'traefik.enable=true'
+      - 'traefik.domain=example.com'
+      - 'traefik.ghost.frontend.rule=Host:drop.example.com'
+      - 'traefik.ghost.port=8000'
+      - 'traefik.ghost.protocol=http'
+  
+
+networks:
+  web:
+    external: true
+
