@@ -17,6 +17,10 @@ services:
       - 'traefik.ghost.frontend.rule=Host:drop.example.com'
       - 'traefik.ghost.port=8000'
       - 'traefik.ghost.protocol=http'
+    entrypoint:
+      - "python3"
+      - "/bin/droopy"
+      - "-d /uploads"
   
 
 networks:

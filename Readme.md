@@ -36,6 +36,31 @@ On Linux, droopy can be run directly without specifically calling `python3`, so
 you can put `droopy` into a folder that's in your system PATH variable, such as
 `/usr/bin/` and call it directly: `droopy --help`.
 
+### Docker
+
+This repository includes a Dockerfile and docker-compose template to run
+Droopy via Docker. It's possible to build and run the image using the
+following commands:
+
+```
+docker build -t droopy:latest .
+docker run -p 127.0.0.1:8000:8000 -it droopy:latest
+```
+
+You can specify command line arguments to Droopy by appending them to the
+`docker run` invocation:
+
+`docker run -p 127.0.0.1:8000:8000 -it droopy:latest -d /my/upload/dir -p img.jpg`
+
+To make Droopy upload files directly to the host filesystem, rather than
+within it's container volume, you can attach a volume to the container at
+run time:
+
+`docker run -v $(pwd)/uploads:/uploads:rw -p 127.0.0.1:8000:8000 -it droopy:latest `
+
+The docker-compose example shows a basic setup, using [Traefik](https://traefik.io/)
+as a reverse proxy to Droopy.
+
 ### Feedback and contribution
 I’d love to hear about your experience using droopy.
 If you have ideas to improve it, please let me know.
