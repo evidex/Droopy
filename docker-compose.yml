@@ -3,8 +3,8 @@ version: "3.2"
 services:
   droopy:
     container_name: droopy
-    networks:
-      - web
+    #networks:
+    #  - web
     volumes:
       - './uploads:/uploads'
     build:
@@ -17,13 +17,15 @@ services:
       - 'traefik.ghost.frontend.rule=Host:drop.example.com'
       - 'traefik.ghost.port=8000'
       - 'traefik.ghost.protocol=http'
+    environment:
+     - PYTHONUNBUFFERED=1
     entrypoint:
       - "python3"
       - "/bin/droopy"
       - "-d /uploads"
   
 
-networks:
-  web:
-    external: true
+        #networks:
+        #  web:
+        #    external: true
 
