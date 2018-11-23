@@ -22,7 +22,8 @@ services:
     entrypoint:
       - "python3"
       - "/bin/droopy"
-      - "-d /uploads"
+      - "-d"
+      - "/uploads"
   
 
         #networks:
